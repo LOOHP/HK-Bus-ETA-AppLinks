@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="refresh" content="0; url='https://play.google.com/store/apps/details?id=com.loohp.hkbuseta'" />
+	<meta property="og:title" content="香港巴士到站預報 HK Bus ETA (WearOS / WatchOS)" />
+	<meta property="og:image" content="https://raw.githubusercontent.com/LOOHP/HK-Bus-ETA-WearOS-WatchOS/main/HKBusETA/androidPhoneApp/app/src/main/res/mipmap-xxxhdpi/icon.png" />
+	<title>香港巴士到站預報 HK Bus ETA</title>
+</head>
+<body>
+    <p>Redirecting...</p>
+
+    <script>
+        function isAppleDevice() {
+            return /iPad|iPhone|iPod|Macintosh/.test(navigator.platform) ||
+                   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        }
+        function redirectUser() {
+            if (isAppleDevice()) {
+                window.location.href = 'https://apps.apple.com/us/app/hk-bus-eta-watchos/id6475241017';
+            } else {
+                window.location.href = 'https://play.google.com/store/apps/details?id=com.loohp.hkbuseta';
+            }
+        }
+        window.onload = redirectUser;
+    </script>
+</body>
+</html>
