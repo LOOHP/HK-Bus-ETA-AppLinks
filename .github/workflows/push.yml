@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repository main code
+      - name: Check out repository code
         uses: actions/checkout@v2
       - name: Merge main and web-app
         run: |
