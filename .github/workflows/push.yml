@@ -15,9 +15,8 @@ jobs:
           mv web-app/* .
           rm -r web-app
       - name: Update files
-        uses: test-room-7/action-update-file@v1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-            file-path: '*'
-            commit-msg: Update Files
-            github-token: ${{ secrets.GITHUB_TOKEN }}
-            branch: pages
+          branch: pages
+          folder: .
+          single-commit: true
