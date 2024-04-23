@@ -1,6 +1,9 @@
 name: Update AppLinks
 on:
   push:
+    branches:
+      - 'main'
+      - 'web-app'
   workflow_dispatch:
 
 jobs:
@@ -10,10 +13,10 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: Update AppLinks
-        uses: test-room-7/action-update-file@v1
-        with:
-            file-path: '*'
-            commit-msg: Update AppLinks
-            github-token: ${{ secrets.GITHUB_TOKEN }}
-            branch: pages
+      - name: Merge main and web-app into pages
+        run: |
+          git fetch origin
+          git checkout pages
+          git merge origin/main --allow-unrelated-histories -m "Merge main into pages"
+          git merge origin/web-app --allow-unrelated-histories -m "Merge web-app into pages"
+          git push origin pages
