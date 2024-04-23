@@ -1,0 +1,19 @@
+name: Update AppLinks
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  Update-AppLinks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Update AppLinks
+        uses: test-room-7/action-update-file@v1
+        with:
+            file-path: *
+            commit-msg: Update AppLinks
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+            branch: pages
