@@ -10,21 +10,9 @@ jobs:
     steps:
       - name: Check out repository main code
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          ref: main
-          path: main
-      - name: Check out repository web-app code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          ref: web-app
-          path: web-app
       - name: Merge main and web-app
         run: |
-          mv main/* .
           mv web-app/* .
-          rm -r main
           rm -r web-app
       - name: Update files
         uses: test-room-7/action-update-file@v1
