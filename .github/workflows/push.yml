@@ -1,9 +1,6 @@
 name: Update files
 on:
   push:
-    branches:
-      - 'main'
-      - 'web-app'
   workflow_dispatch:
 
 jobs:
