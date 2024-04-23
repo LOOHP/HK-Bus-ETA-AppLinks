@@ -1,4 +1,4 @@
-name: Update AppLinks
+name: Update files
 on:
   push:
     branches:
@@ -7,16 +7,32 @@ on:
   workflow_dispatch:
 
 jobs:
-  Update-AppLinks:
+  Update-Files:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repository code
+      - name: Check out repository main code
         uses: actions/checkout@v2
-      - name: Merge main and web-app into pages
+        with:
+          fetch-depth: 0
+          ref: main
+          path: main
+      - name: Check out repository web-app code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: web-app
+          path: web-app
+      - name: Merge main and web-app
         run: |
-          git fetch origin
-          git checkout pages
-          git merge origin/main --allow-unrelated-histories -m "Merge main into pages"
-          git merge origin/web-app --allow-unrelated-histories -m "Merge web-app into pages"
-          git push origin pages
+          mv main/* .
+          mv web-app/* .
+          rm -r main
+          rm -r web-app
+      - name: Update files
+        uses: test-room-7/action-update-file@v1
+        with:
+            file-path: '*'
+            commit-msg: Update Files
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+            branch: pages
