@@ -23,6 +23,7 @@
     <script type="application/javascript" src="MapView.js" defer></script>
     <script type="application/javascript" src="FileSaver.js"></script>
     <script type="application/javascript" src="Main.js"></script>
+    <script type="application/javascript" src="Defer.js" defer></script>
     <script type="application/javascript" src="skiko.js"></script>
     <!--suppress HtmlUnknownTarget -->
     <script type="application/javascript" src="composeApp.js"></script>
@@ -35,6 +36,31 @@
         <img src="icon_max.png" alt="HKBusETA">
         <p>載入中...</p>
         <p>Loading...</p>
+    </div>
+    <div id="download-app-backdrop" class="modal-backdrop" style="display: none;"></div>
+    <div id="download-app" class="modal-bottom-sheet" style="display: none;">
+        <div class="modal-content">
+            <p style="font-size: 21px;">
+                下載香港巴士到站預報應用程式！<br>Download the HK Bus ETA app!
+            </p>
+            <p style="font-size: 12px;">
+                Android / iOS / Apple Silicon Mac / WearOS / watchOS
+            </p>
+            <img src="icon_full_smaller.png" style="width: 150px; margin: 10px;" alt="HKBusETA">
+            <br>
+            <a href="https://play.google.com/store/apps/details?id=com.loohp.hkbuseta" target="_blank" id="store-url" style="margin: 15px;">
+                <img id="store-banner" class="hover-lighten" src="googleplay.png" style="height: 60px;" alt="在Google Play下載 Download on Google Play">
+            </a>
+            <br>
+            <p style="font-size: 12px; text-decoration: underline; margin-bottom: 20px;">
+                <a href="https://apps.apple.com/app/id6475241017" target="_blank" id="store-alt" class="hover-lighten">
+                    或在App Store下載 Or download on the App Store
+                </a>
+            </p>
+            <button class="continue-button" onclick="setDownloadAppSheetVisible(isAppleDevice(), false);" style="margin-bottom: 10px;">
+                繼續使用瀏覽器<br>Continue in Browser
+            </button>
+        </div>
     </div>
     <canvas id="ComposeTarget"></canvas>
 </body>

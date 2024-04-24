@@ -1,6 +1,45 @@
+function isDownloadAppSheetVisible() {
+    return document.getElementById("download-app").style.display != "none";
+}
+
+function setDownloadAppSheetVisible(isApple, visible, forceDarkMode) {
+    let darkMode = forceDarkMode
+    if (darkMode == undefined && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        darkMode = true
+    }
+    if (darkMode) {
+        document.getElementById("download-app").classList.add("dark-modal-bottom-sheet");
+    } else if (darkMode != undefined) {
+        document.getElementById("download-app").classList.remove("dark-modal-bottom-sheet");
+    }
+    if (isApple) {
+        document.getElementById("store-url").href = "https://apps.apple.com/app/id6475241017";
+        document.getElementById("store-alt").href = "https://play.google.com/store/apps/details?id=com.loohp.hkbuseta";
+        document.getElementById("store-banner").src = "appstore.png";
+        document.getElementById("store-banner").alt = "在App Store下載 Download on the App Store";
+        document.getElementById("store-alt").innerHTML = "或在Google Play下載 Or download on Google Play";
+    } else {
+        document.getElementById("store-url").href = "https://play.google.com/store/apps/details?id=com.loohp.hkbuseta";
+        document.getElementById("store-alt").href = "https://apps.apple.com/app/id6475241017";
+        document.getElementById("store-banner").src = "googleplay.png";
+        document.getElementById("store-banner").alt = "在Google Play下載 Download on Google Play";
+        document.getElementById("store-alt").innerHTML = "或在App Store下載 Or download on the App Store";
+    }
+    if (visible) {
+        document.getElementById("download-app-backdrop").classList.add("modal-backdrop-shown");
+        document.getElementById("download-app-backdrop").style.display = "";
+        document.getElementById("download-app").classList.add("modal-bottom-sheet-shown");
+        document.getElementById("download-app").style.display = "";
+    } else {
+        document.getElementById("download-app-backdrop").classList.remove("modal-backdrop-shown");
+        setTimeout(() => document.getElementById("download-app-backdrop").style.display = "none", 200);
+        document.getElementById("download-app").classList.remove("modal-bottom-sheet-shown");
+        setTimeout(() => document.getElementById("download-app").style.display = "none", 200);
+    }
+}
+
 function isAppleDevice() {
-    return /iPad|iPhone|iPod|Macintosh/.test(navigator.platform) ||
-           (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    return /iPad|iPhone|iPod|Macintosh/.test(navigator.platform) || navigator.platform === 'MacIntel';
 }
 
 function isMobileDevice() {
