@@ -64,7 +64,6 @@ class WebMap {
         this.map.flyTo([lat, lng], 15, {animate: false});
 
         var onMapMove = () => {
-            console.log(this);
             var center = this.map.getCenter();
             var zoom = this.map.getZoom();
             onMoveCallback(center.lat, center.lng, zoom);
