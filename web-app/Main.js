@@ -1,5 +1,5 @@
 function isDownloadAppSheetVisible() {
-    return document.getElementById("download-app").style.display != "none";
+    return document.getElementById("download-app").classList.contains("modal-bottom-sheet-shown");
 }
 
 function setDownloadAppSheetVisible(isApple, visible, forceDarkMode) {
