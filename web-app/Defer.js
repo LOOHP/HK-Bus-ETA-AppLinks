@@ -1,1 +1,1 @@
-setDownloadAppSheetVisible(isAppleDevice(), isMobileDevice())
+setDownloadAppSheetVisible(isAppleDevice(), isMobileDevice());
