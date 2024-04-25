@@ -1,1 +1,3 @@
-setDownloadAppSheetVisible(isAppleDevice(), isMobileDevice());
+isWasmSupported((wasmSupported) => {
+    setDownloadAppSheetVisible(isAppleDevice(), isMobileDevice() || !wasmSupported);
+});

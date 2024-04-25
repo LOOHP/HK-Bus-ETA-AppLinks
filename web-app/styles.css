@@ -193,8 +193,16 @@ body {
     cursor: pointer;
 }
 
+.continue-button:disabled, .continue-button[disabled] {
+    cursor: default;
+}
+
 .continue-button:hover {
     background-color: #A4504C;
+}
+
+.continue-button:disabled:hover, .continue-button[disabled]:hover {
+    background-color: #9C413D;
 }
 
 .dark-modal-bottom-sheet .continue-button {
@@ -204,4 +212,8 @@ body {
 
 .dark-modal-bottom-sheet .continue-button:hover {
     background-color: #F2A7A2;
+}
+
+.dark-modal-bottom-sheet .continue-button:disabled:hover, .dark-modal-bottom-sheet .continue-button[disabled]:hover {
+    background-color: #FFB3AE;
 }

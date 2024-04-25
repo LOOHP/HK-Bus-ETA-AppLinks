@@ -1,3 +1,19 @@
+function isWasmSupported(callback) {
+    try {
+        if (typeof WebAssembly === "object"  && typeof WebAssembly.instantiate === "function") {
+            const module = new WebAssembly.Module(Uint8Array.of(0x0, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00));
+            if (module instanceof WebAssembly.Module) {
+                if (new WebAssembly.Instance(module) instanceof WebAssembly.Instance) {
+                    wasmFeatureDetect.gc().then(callback);
+                    return;
+                }
+            }
+        }
+    } catch (e) {
+    }
+    callback(false);
+}
+
 function isDownloadAppSheetVisible() {
     return document.getElementById("download-app").classList.contains("modal-bottom-sheet-shown");
 }
@@ -25,6 +41,13 @@ function setDownloadAppSheetVisible(isApple, visible, forceDarkMode) {
         document.getElementById("store-banner").alt = "在Google Play下載 Download on Google Play";
         document.getElementById("store-alt").innerHTML = "或在App Store下載 Or download on the App Store";
     }
+    if (isWasmSupported()) {
+        document.getElementById("continue-button").innerHTML = "繼續使用瀏覽器<br>Continue in Browser";
+        document.getElementById("continue-button").disabled = false;
+    } else {
+        document.getElementById("continue-button").innerHTML = "您的瀏覽器不支援WASM<br>Your browser does not support WASM";
+        document.getElementById("continue-button").disabled = true;
+    }
     if (visible) {
         document.getElementById("download-app-backdrop").classList.add("modal-backdrop-shown");
         document.getElementById("download-app-backdrop").style.display = "";
@@ -50,10 +73,6 @@ function shareUrlMenu(url, title) {
     if (navigator.share) {
         navigator.share({title: title, url: url});
     }
-}
-
-function addNavigateListener(callback) {
-    window.navigation.addEventListener("navigate", event => callback())
 }
 
 async function decompressBase64GzipToBase64(inputBase64) {
