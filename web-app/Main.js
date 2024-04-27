@@ -18,7 +18,7 @@ function isDownloadAppSheetVisible() {
     return document.getElementById("download-app").classList.contains("modal-bottom-sheet-shown");
 }
 
-function setDownloadAppSheetVisible(isApple, visible, forceDarkMode) {
+function setDownloadAppSheetVisible(isApple, visible, forceDarkMode, wasmSupported) {
     let darkMode = forceDarkMode
     if (darkMode == undefined && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         darkMode = true
@@ -41,7 +41,7 @@ function setDownloadAppSheetVisible(isApple, visible, forceDarkMode) {
         document.getElementById("store-banner").alt = "在Google Play下載 Download on Google Play";
         document.getElementById("store-alt").innerHTML = "或在App Store下載 Or download on the App Store";
     }
-    if (isWasmSupported()) {
+    if (wasmSupported) {
         document.getElementById("continue-button").innerHTML = "繼續使用瀏覽器<br>Continue in Browser";
         document.getElementById("continue-button").disabled = false;
     } else {
