@@ -1,12 +1,12 @@
 @font-face {
     font-family: "Noto Sans HK";
-    src: url('NotoSansHK-Regular.ttf');
+    src: url('fonts/NotoSansHK-Regular.ttf');
     font-weight: normal;
 }
 
 @font-face {
     font-family: "Noto Sans HK";
-    src: url('NotoSansHK-Bold.ttf');
+    src: url('fonts/NotoSansHK-Bold.ttf');
     font-weight: bold;
 }
 
