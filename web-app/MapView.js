@@ -1,5 +1,6 @@
 class WebMap {
     constructor() {
+        this.valid = true;
         this.mapElement = document.createElement("div");
         this.mapId = "map_" + Math.floor(Math.random() * Math.floor(1000000));
         this.mapElement.id = this.mapId;
@@ -8,7 +9,7 @@ class WebMap {
         document.body.appendChild(this.mapElement);
 
         this.map = L.map(this.mapId).setView([22.32267, 144.17504], 13);
-        window.addEventListener("resize", () => this.map.invalidateSize());
+
         L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
@@ -17,10 +18,15 @@ class WebMap {
         this.layer = L.layerGroup().addTo(this.map);
         this.polylines = [];
         this.polylinesOutline = [];
+
+        this.resizeCallback = () => this.map.invalidateSize();
+        window.addEventListener("resize", this.resizeCallback);
     }
 
     remove() {
+        this.valid = false;
         this.hide();
+        window.removeEventListener("resize", this.resizeCallback);
         setTimeout(() => this.mapElement.remove(), 1000);
     }
 
@@ -102,10 +108,8 @@ class WebMap {
         stops.forEach((point, index) => {
             L.marker(point, {icon: stopIcon})
                .addTo(this.layer)
-               .bindPopup("<div style='text-align: center;'>" + stopNames[index] + "<div>", {offset: L.point(0, -22)})
-               .on('click', () => {
-                   selectStopCallback(index);
-               });
+               .bindPopup("<div style='text-align: center;'>" + stopNames[index] + "<div>", { offset: L.point(0, -22), closeButton: false })
+               .on('click', () => selectStopCallback(index));
         });
 
         var paths = splitLatLngPaths(pathsJsArray);
