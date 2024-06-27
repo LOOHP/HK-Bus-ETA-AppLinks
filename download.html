@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta property="og:title" content="香港巴士到站預報 HK Bus ETA" />
+	<meta property="og:image" content="https://app.hkbuseta.com/icon-512.png" />
+	<title>香港巴士到站預報 HK Bus ETA</title>
+</head>
+<body>
+    <p>Redirecting...</p>
+
+    <script>
+        function isAppleDevice() {
+            return /iPad|iPhone|iPod|Macintosh/.test(navigator.platform) || navigator.platform === 'MacIntel';
+        }
+        function redirectUser() {
+            const url = new URL(location.href);
+            const type = url.searchParams.get("store");
+            if (type == "apple") {
+                window.location.href = 'https://apps.apple.com/app/id6475241017';
+            } else if (type == "google") {
+                window.location.href = 'https://play.google.com/store/apps/details?id=com.loohp.hkbuseta';
+            } else if (isAppleDevice()) {
+                window.location.href = 'https://apps.apple.com/app/id6475241017';
+            } else {
+                window.location.href = 'https://play.google.com/store/apps/details?id=com.loohp.hkbuseta';
+            }
+        }
+        window.onload = redirectUser;
+    </script>
+</body>
+</html>
